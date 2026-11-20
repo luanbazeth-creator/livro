@@ -197,3 +197,32 @@ button:disabled{cursor:default;opacity:.38}
 
 .page-gallery .photo-gallery{margin:clamp(26px,5vh,45px) 0 12px}
 .page-gallery .gallery-bottom{margin:auto 0 12px}
+
+/* Pequenos ajustes de legibilidade nos capítulos */
+.page-details .body-copy{margin:9px 0 9px;font-size:clamp(20px,1.85vw,23px);line-height:1.16}
+.page-details .heart-list{line-height:1.42;padding:8px}
+.page-details .handwritten{margin:7px 0 4px;font-size:clamp(24px,2vw,28px);line-height:1.0}
+/* Quatro fotos em páginas próprias, sem cortes, na ordem em que foram enviadas */
+.page-photo-memory .page-surface{align-items:center;justify-content:flex-start;gap:0;overflow:hidden}
+.page-photo-memory .page-heading{flex:0 0 auto}
+.page-photo-memory .page-heading h3{font-size:clamp(32px,3.6vw,47px);line-height:.95}
+.page-photo-memory .page-ornament{margin:7px 0 5px}
+.storybook-photo-frame{display:flex;flex-direction:column;align-items:center;gap:5px;flex:1 1 auto;min-height:0;max-height:69%;width:min(84%,320px);padding:8px 8px 4px;margin:5px auto 8px;transform:rotate(-1.2deg);background:#fffaf0;border:1px solid #dac5a3;box-shadow:0 7px 18px #543a3b50,0 0 0 4px #bd8b6840}
+.story-photo-well{flex:1 1 auto;min-height:0;width:100%;overflow:hidden;display:flex;align-items:center;justify-content:center;background:linear-gradient(140deg,#6f4f6c,#3e2f51)}
+.story-photo-well img{width:100%;height:100%;max-height:100%;object-fit:contain;object-position:center center;display:block}
+.storybook-photo-frame figcaption{flex:0 0 auto;max-width:100%;font-family:var(--script);color:#79425f;font-size:clamp(18px,2.4vw,25px);line-height:1.0;text-align:center;white-space:normal;overflow:visible;padding:2px 6px;text-wrap:balance}
+.storybook-photo-note{font-family:var(--serif);font-size:clamp(17px,1.9vw,22px);color:#70465b;line-height:1.05;text-align:center;margin:0 auto 9px;max-width:92%;flex:0 0 auto}
+@media(max-width:760px){
+  .page-photo-memory .page-surface{padding:16px 17px 22px;overflow:hidden}
+  .page-photo-memory .page-heading h3{font-size:clamp(31px,8.5vw,42px)}
+  .page-photo-memory .page-kicker{font-size:8px;margin-bottom:4px}
+  .page-photo-memory .page-ornament{margin:4px 0 3px}
+  .storybook-photo-frame{width:min(79%,280px);max-height:65%;margin:6px auto 7px;padding:6px 6px 3px}
+  .storybook-photo-frame figcaption{font-size:clamp(18px,5.2vw,23px);white-space:normal;line-height:1.0;overflow:visible;max-height:46px;display:flex;align-items:center;justify-content:center;text-wrap:balance}
+  .storybook-photo-note{font-size:clamp(15px,4.15vw,20px);max-width:96%;line-height:1.06}
+}
+@media(max-height:650px){
+  .storybook-photo-frame{max-height:60%}
+  .page-photo-memory .page-heading h3{font-size:clamp(29px,7vw,39px)}
+  .storybook-photo-note{font-size:15px}
+}

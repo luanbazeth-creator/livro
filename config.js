@@ -1,37 +1,31 @@
 /*
-  PERSONALIZE AQUI SEU LIVRO! ♥
-  Edite apenas o texto entre aspas. Salve o arquivo e atualize a página.
-  Para adicionar fotos, coloque as imagens na pasta assets e escreva o caminho.
+  NOSSO CONTO DE FADAS — LIVRO SEM FIREBASE ♡
+  Quer mudar alguma frase? Edite o texto entre aspas.
+  As fotos já estão no site, em ordem, dentro da pasta assets.
+  Para publicar mudanças: envie os arquivos alterados ao GitHub Pages.
 */
 window.LIVRO_CONFIG = {
-  // Nome da sua namorada (aparece na dedicatória)
-  nomeDela: "Minha princesa",
-
-  // Seu nome (aparece na assinatura da carta)
-  seuNome: "Seu príncipe",
-
-  // Opcional: data em que começaram a namorar (AAAA-MM-DD).
-  // Deixe vazio caso não queira mostrar um contador.
+  nomeDela: "minha princesa",
+  seuNome: "Seu amor",
+  // Opcional: se quiser um contador, coloque a data de início no formato AAAA-MM-DD.
   dataInicio: "",
-
-  // Mensagens principais do livro
-  dedicatória: "Existem histórias que a gente lê e esquece. E existem aquelas que mudam a nossa vida. Esta é a minha favorita, porque tem você em cada página e um pedacinho de nós em cada palavra.",
-  primeiraPagina: "Nos contos de fadas, a magia começa com um feitiço. Na minha vida, ela começou de um jeito bem mais bonito: quando você apareceu. Eu não fazia ideia de quantas coisas poderiam mudar até descobrir como é bom ter você por perto.",
-  capituloUm: "Entre tantos caminhos que eu poderia ter seguido, a vida encontrou um jeito de cruzar o meu com o seu. E, aos poucos, sem precisar de grandes acontecimentos, você foi virando a pessoa que eu mais queria encontrar no fim de qualquer dia.",
-  textoEspecial: "Tem algo em você que eu nunca consegui explicar direito. Talvez seja o seu sorriso, o jeito como me faz rir sem esforço ou como até o silêncio fica bom quando estamos juntos. No fim, acho que meu encanto preferido é simplesmente você sendo você.",
-  capituloDois: "Nem todas as nossas lembranças precisam de uma data importante. Algumas nasceram em conversas bobas, em abraços demorados ou naqueles instantes em que a gente queria que o tempo andasse mais devagar. São pequenos momentos que fazem a nossa história ser gigante.",
-  textoMemorias: "Três pedacinhos da nossa história. As fotos guardam os instantes; eu guardo tudo o que senti neles.",
-  promessaUm: "Estar ao seu lado nos dias leves e também naqueles em que tudo parecer pesado.",
-  promessaDois: "Aplaudir seus sonhos, cuidar dos nossos e nunca deixar de torcer por você.",
-  promessaTres: "Lembrar, nas coisas mais simples, que amar você também é uma escolha feliz de todos os dias.",
-  carta: "Meu amor,\n\nTalvez você nem imagine o quanto mudou os meus dias. Depois que você chegou, até as coisas mais simples passaram a ter outro significado. Gosto das nossas conversas sem hora para acabar, das nossas brincadeiras e de como consigo ser eu mesmo quando estou com você.\n\nNão prometo um conto sem dias difíceis, mas prometo carinho, parceria e vontade de fazer dar certo. Quero estar por perto para ver seus sonhos acontecerem e criar muitos outros ao seu lado.\n\nE se eu pudesse escolher de novo entre tantos caminhos, escolheria aquele que me trouxe até você.\n\nTe amo, minha princesa. ♡",
-  ultimoRecado: "Se este fosse um livro de verdade, eu não gostaria de escrever a última página. Porque, com você, até o que ainda não aconteceu já me dá vontade de viver. Que venham os próximos capítulos — e que a gente continue escrevendo todos juntos.",
-
-  // FOTOS: troque as aspas vazias pelo arquivo da imagem, por exemplo:
-  // "assets/foto-1.jpg", "assets/foto-2.jpg", "assets/foto-3.jpg"
-  // Se estiverem vazias, aparecerão molduras decorativas.
-  fotos: ["", "", ""],
-
-  // Legendas padrão; podem ser editadas pelo painel de administrador.
-  legendasFotos: ["Meu lugar preferido", "Eu amo esse sorriso", "Mais um dia com você"]
+  dedicatória: "Se um dia me perguntarem qual foi a história mais bonita que já vivi, eu não vou precisar pensar muito. Não tem dragão, coroa nem castelo de verdade. Tem você, tem eu e um monte de momentos que eu não trocaria por nada. Este livro é só um jeitinho de guardar o que meu coração já sabe: você é a minha parte favorita.",
+  primeiraPagina: "Engraçado pensar que, antes da gente, eu ainda não conhecia todos os jeitos de ser feliz. Hoje, às vezes, basta uma mensagem sua, uma risada do nada ou um abraço que dura um pouquinho mais. Você chegou e, sem fazer barulho, deixou meus dias com outro sentido.",
+  capituloUm: "Eu gosto de pensar na gente como aquelas histórias que ficam melhores a cada capítulo. Nem tudo é perfeito, eu sei. Mas, quando olho para o que estamos construindo, dá uma vontade danada de continuar. Porque o melhor de tudo não é só lembrar do que já vivemos: é saber que ainda existe tanto pra viver com você.",
+  textoEspecial: "Se eu fosse contar tudo que amo em você, estas páginas iam ficar pequenas. Amo seu jeitinho, sua presença, o modo como você consegue transformar uma conversa simples em uma lembrança boa. E amo, principalmente, quem eu sou quando estamos juntos: alguém que sorri mais, sonha mais e quer ficar mais um pouco.",
+  capituloDois: "Sabe o que eu acho mais bonito? A gente não precisa estar vivendo um momento extraordinário para ser feliz. Às vezes, é só uma foto, uma brincadeira, um carinho inesperado. O tempo passa, mas essas pequenas coisas ficam guardadas, como tesouros que só nós dois sabemos o valor.",
+  textoMemorias: "Quatro registros, quatro sorrisos por dentro. Não é sobre sair perfeito na foto: é sobre ter você nela.",
+  promessaUm: "Estar do seu lado quando o dia for maravilhoso e também quando ele pedir um abraço mais apertado.",
+  promessaDois: "Te escolher nas coisas grandes e nas pequenas, inclusive quando a rotina tentar deixar tudo sem graça.",
+  promessaTres: "Continuar juntando histórias, risadas e planos — e nunca esquecer que a nossa melhor parte é caminhar juntos.",
+  carta: "Meu amor,\n\nEu podia tentar escrever a carta mais bonita do mundo, mas acho que o que eu mais quero é te dizer uma coisa simples: eu amo a vida que a gente vai construindo aos pouquinhos. Amo nossas fotos, nossas conversas, as brincadeiras bobas e até aquela saudade que aparece quando você acabou de ir embora.\n\nQuando olho pra gente, vejo muito mais que momentos bonitos. Vejo alguém que eu quero por perto nos meus dias normais, nos meus sonhos maiores e nas pequenas vitórias que merecem ser comemoradas.\n\nNão prometo acertar sempre. Prometo fazer questão de você, de nós e de tudo o que ainda podemos viver. Se o nosso amor é um livro, eu quero continuar virando cada página ao seu lado.\n\nTe amo, minha princesa. ♡",
+  ultimoRecado: "Se fosse preciso escolher uma única história para viver de novo, eu escolheria a nossa. E, mesmo assim, preferia seguir em frente — porque ainda quero descobrir os lugares que vamos conhecer, as fotos que vamos tirar e os motivos que ainda teremos para sorrir juntos. O nosso 'felizes para sempre' é continuar escolhendo um ao outro.",
+  fotos: ["assets/foto-01.jpg", "assets/foto-02.jpg", "assets/foto-03.jpg", "assets/foto-04.jpg"],
+  legendasFotos: ["Só nós dois e aquele momento ♡", "Meu sorriso tem muito de você", "Um beijo, mil lembranças", "A gente combina até no espelho"],
+  frasesFotos: [
+    "O resto do mundo podia continuar andando. Eu só queria que esse instante com você durasse um pouquinho mais.",
+    "A melhor parte de qualquer rolê é ter alguém com quem eu possa ser exatamente quem sou. Com você, até uma selfie vira lembrança favorita.",
+    "Tem carinho que não precisa de legenda. É só olhar de novo e sentir tudo aquilo que eu senti quando a foto foi tirada.",
+    "Às vezes a vida é assim: um espelho, uma foto sem muita preparação e, de repente, mais uma memória que eu vou querer guardar pra sempre."
+  ]
 };

@@ -11,13 +11,6 @@
   const header = (chapter, title) => `<div class="page-heading"><span class="page-kicker">${chapter}</span><h3>${title}</h3>${ornaments}</div>`;
   const footer = (num) => `<span class="folio" aria-hidden="true">✦ &nbsp; ${String(num).padStart(2, '0')} &nbsp; ✦</span>`;
   const page = (type, content, num) => `<article class="storybook-page page-${type}"><div class="page-border"><div class="page-surface">${content}</div>${footer(num)}</div></article>`;
-  const photo = (source, index) => {
-    const label = ((cfg.legendasFotos || [])[index] || ['Nossa lembrança favorita', 'Um instante especial', 'Um pedacinho de nós'][index] || 'Nossa foto').slice(0, 80);
-    if (typeof source === 'string' && source.trim()) {
-      return `<div class="polaroid" style="--angle:${[-5,4,-2][index]}deg"><div class="polaroid-image"><img src="${escape(source.trim())}" alt="${escape(label)}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.hidden=false;"><span class="photo-fallback" hidden>♡<small>Adicione uma foto</small></span></div><span>${escape(label)} ♡</span></div>`;
-    }
-    return `<div class="polaroid" style="--angle:${[-5,4,-2][index]}deg"><div class="polaroid-image photo-empty"><span aria-hidden="true">${['♡','✧','❦'][index]}</span><small>Sua foto aqui</small></div><span>${escape(label)} ♡</span></div>`;
-  };
 
   function counterMarkup() {
     if (!cfg.dataInicio) {
@@ -32,17 +25,29 @@
     return `<div class="time-number">${days.toLocaleString('pt-BR')}</div><div class="time-unit">${days === 1 ? 'dia' : 'dias'} escrevendo nosso conto</div><p class="body-copy">Não são apenas números. São dias de conversa, risadas, saudade, reencontros e mais motivos para te escolher.</p>`;
   }
 
+  const photoPage = (index, chapter, title, folio) => {
+    const src = ((cfg.fotos || [])[index] || '').trim();
+    const caption = escape((cfg.legendasFotos || [])[index] || 'Um momento que vale guardar');
+    const note = escape((cfg.frasesFotos || [])[index] || 'Uma lembrança especial com você.');
+    const img = src ? `<img src="${escape(src)}" alt="Nossa fotografia ${index+1}, em ordem de lembranças" loading="lazy">` : `<div class="no-photo">♡</div>`;
+    return page('photo-memory', `${header(chapter, title)}<figure class="storybook-photo-frame"><div class="story-photo-well">${img}</div><figcaption>${caption} ✦</figcaption></figure><p class="storybook-photo-note">${note}</p>`, folio);
+  };
+
   function makePages() { return [
-    page('dedication', `<div class="small-crown">♕</div>${header('UMA DEDICATÓRIA', `Para ${name()}`)}<p class="body-copy centered">${escape(cfg.dedicatória)}</p><img class="castle-art" src="assets/castelo.webp" alt="Castelo encantado ao entardecer"><p class="page-signoff">Com todo o meu amor, ${byline()}</p>`, 1),
-    page('opening', `${header('O PREFÁCIO', 'Antes de tudo...')}<div class="dropcap-copy">${escape(cfg.primeiraPagina)}</div><div class="quote-ornament">❝</div><blockquote class="book-quote">A melhor parte de te conhecer foi descobrir que os dias comuns também podiam ser extraordinários.</blockquote><div class="soft-stars" aria-hidden="true">✧　✦　✧</div>`, 2),
-    page('chapter', `${header('CAPÍTULO I', 'Quando tudo começou')}<div class="chapter-medallion" aria-hidden="true">✦<span>♡</span>✦</div><p class="body-copy centered">${escape(cfg.capituloUm)}</p><p class="handwritten">A gente nem sabia quantas coisas boas ainda viriam...</p>`, 3),
-    page('details', `${header('CADA DETALHE', 'O meu feitiço favorito')}<p class="body-copy">${escape(cfg.textoEspecial)}</p><div class="heart-list"><span>♡</span> Seu sorriso que muda o meu dia.<br><span>♡</span> Nossas piadas que só a gente entende.<br><span>♡</span> A paz de ter você por perto.</div><p class="handwritten">E eu sou fã até dos seus detalhes. ♡</p>`, 4),
-    page('memories-intro', `${header('CAPÍTULO II', 'Nossas lembranças')}<div class="memory-frame"><div class="memory-frame-inner"><span>✧</span><strong>Se a felicidade tivesse álbum, muitas páginas seriam nossas.</strong><span>♡</span></div></div><p class="body-copy centered">${escape(cfg.capituloDois)}</p>`, 5),
-    page('gallery', `${header('UM ÁLBUM ENCANTADO', 'Momentos de nós dois')}<p class="gallery-intro">${escape(cfg.textoMemorias)}</p><div class="photo-gallery">${Array.from({length:3}, (_,i) => photo((cfg.fotos || [])[i],i)).join('')}</div><p class="handwritten gallery-bottom">Cada fotografia, um motivo para sorrir de novo.</p>`, 6),
-    page('time', `${header('CADA SEGUNDO IMPORTA', 'Nossa história em dias')}<div class="time-container"><div class="time-rose" aria-hidden="true">❦</div>${counterMarkup()}</div><div class="bottom-vine" aria-hidden="true">✧　♡　✧</div>`, 7),
-    page('promises', `${header('CAPÍTULO III', 'Minhas promessas')}<p class="body-copy centered">Não sei prever o futuro nem fazer mágica. Mas sei como quero caminhar por ele: com você.</p><div class="promise-list"><div><span>✧</span><p>${escape(cfg.promessaUm)}</p></div><div><span>♡</span><p>${escape(cfg.promessaDois)}</p></div><div><span>✦</span><p>${escape(cfg.promessaTres)}</p></div></div>`, 8),
-    page('secret', `${header('UMA PÁGINA SECRETA', 'Uma carta para você')}<p class="body-copy centered">Tem palavras que eu queria te dizer olhando nos seus olhos. Como nem sempre consigo, guardei algumas aqui, só para você.</p><button class="letter-button" type="button" aria-label="Abrir a carta de amor"><span class="envelope" aria-hidden="true"><span class="envelope-heart">♥</span></span><span class="letter-cta">Toque para abrir sua cartinha</span></button><div class="letter-content" hidden><p>${nl2br(cfg.carta)}</p><span>Com amor, ${byline()} ♡</span></div>`, 9),
-    page('ending', `${header('CONTINUA...', 'Nosso para sempre')}<div class="ending-illustration"><img src="assets/ilustracao-capa.webp" alt="Um casal apaixonado em um conto de fadas"></div><p class="body-copy centered ending-message">${escape(cfg.ultimoRecado)}</p><p class="end-note">E decidiram viver todos os próximos capítulos...<br><strong>juntos.</strong> ♡</p><button class="restart-button" type="button">Recomeçar nossa história ↶</button>`, 10)
+    page('dedication', `<div class="small-crown">♕</div>${header('UMA DEDICATÓRIA', `Para ${name()}`)}<p class="body-copy centered">${escape(cfg.dedicatória)}</p><img class="castle-art" src="assets/castelo.webp" alt="Castelo encantado ao entardecer"><p class="page-signoff">Com amor, ${byline()}</p>`, 1),
+    page('opening', `${header('ANTES DE TUDO', 'Era uma vez nós dois...')}<div class="dropcap-copy">${escape(cfg.primeiraPagina)}</div><div class="quote-ornament">❝</div><blockquote class="book-quote">Nem toda magia precisa de feitiço. Às vezes, ela chega com o seu sorriso.</blockquote><div class="soft-stars" aria-hidden="true">✧　✦　✧</div>`, 2),
+    page('chapter', `${header('CAPÍTULO I', 'O começo de tudo')}<div class="chapter-medallion" aria-hidden="true">✦<span>♡</span>✦</div><p class="body-copy centered">${escape(cfg.capituloUm)}</p><p class="handwritten">E pensar que ainda temos tanta coisa para viver...</p>`, 3),
+    photoPage(0, 'PRIMEIRA LEMBRANÇA', 'Um momento só nosso', 4),
+    page('details', `${header('UM ENCANTO PARTICULAR', 'Meu lugar favorito')}<p class="body-copy">${escape(cfg.textoEspecial)}</p><div class="heart-list"><span>♡</span> O seu jeitinho que me conquista.<br><span>♡</span> As nossas conversas sem roteiro.<br><span>♡</span> O conforto de estar com você.</div><p class="handwritten">O que eu mais gosto é da gente sendo a gente.</p>`, 5),
+    photoPage(1, 'SEGUNDA LEMBRANÇA', 'A gente do nosso jeito', 6),
+    page('memories-intro', `${header('CAPÍTULO II', 'Nosso álbum de vida')}<div class="memory-frame"><div class="memory-frame-inner"><span>✧</span><strong>Se amor virasse fotografia, meu álbum preferido seria cheio de nós dois.</strong><span>♡</span></div></div><p class="body-copy centered">${escape(cfg.capituloDois)}</p>`, 7),
+    photoPage(2, 'TERCEIRA LEMBRANÇA', 'Carinho que fica', 8),
+    page('promises', `${header('CAPÍTULO III', 'Pequenas promessas')}<p class="body-copy centered">Eu não tenho como adivinhar o futuro, mas sei uma coisa: quero continuar descobrindo a vida com você.</p><div class="promise-list"><div><span>✧</span><p>${escape(cfg.promessaUm)}</p></div><div><span>♡</span><p>${escape(cfg.promessaDois)}</p></div><div><span>✦</span><p>${escape(cfg.promessaTres)}</p></div></div>`, 9),
+    photoPage(3, 'QUARTA LEMBRANÇA', 'Até o espelho sabe', 10),
+    page('time', `${header('O QUE AINDA VEM AÍ', 'Uma história sem fim')}<div class="time-container"><div class="time-rose" aria-hidden="true">❦</div>${counterMarkup()}</div><div class="bottom-vine" aria-hidden="true">✧　♡　✧</div>`, 11),
+    page('secret', `${header('UMA PÁGINA SECRETA', 'Uma carta para você')}<p class="body-copy centered">Tem coisas que eu penso quando estamos juntos e nem sempre digo na hora. Guardei algumas aqui. Só para você.</p><button class="letter-button" type="button" aria-label="Abrir a carta de amor"><span class="envelope" aria-hidden="true"><span class="envelope-heart">♥</span></span><span class="letter-cta">Toque para abrir sua cartinha</span></button><div class="letter-content" hidden><p>${nl2br(cfg.carta)}</p><span>Com amor, ${byline()} ♡</span></div>`, 12),
+    page('chapter', `${header('E TEM MAIS...', 'O que eu sei de nós')}<div class="chapter-medallion" aria-hidden="true">✦<span>♥</span>✦</div><p class="body-copy centered">Não sei quantas páginas a vida ainda vai nos dar. Mas tenho uma certeza bonita: eu quero continuar juntando memórias contigo, com toda a bagunça, alegria e carinho que fazem a gente ser quem é.</p><p class="handwritten">Meu futuro tem muita vontade de você.</p>`, 13),
+    page('ending', `${header('CONTINUA...', 'Nosso para sempre')}<div class="ending-illustration"><img src="assets/ilustracao-capa.webp" alt="Um casal apaixonado em um conto de fadas"></div><p class="body-copy centered ending-message">${escape(cfg.ultimoRecado)}</p><p class="end-note">E assim começa o nosso próximo capítulo...<br><strong>juntos.</strong> ♡</p><button class="restart-button" type="button">Recomeçar nossa história ↶</button>`, 14)
   ]; }
   let pages = makePages();
 
@@ -236,47 +241,6 @@
       lastMobile = isMobile;
     }
   });
-
-  // O site mostra o conteúdo padrão até as publicações do Firestore carregarem.
-  // A tela de edição fica numa página separada e nunca é exposta no livro.
-  window.LIVRO_ATUALIZAR = function (conteudo, imagens) {
-    if (conteudo && typeof conteudo === 'object') {
-      for (const chave of Object.keys(window.LIVRO_CONFIG || {})) {
-        if (chave === 'fotos' || chave === 'legendasFotos') continue;
-        if (typeof conteudo[chave] === 'string') cfg[chave] = conteudo[chave].slice(0, 5500);
-      }
-    }
-    if (imagens && typeof imagens === 'object') {
-      let capa = '';
-      const fotos = [...(cfg.fotos || ['', '', ''])];
-      const legendas = [...(cfg.legendasFotos || ['','',''])];
-      for (const [i, id] of ['capa','foto-1','foto-2','foto-3'].entries()) {
-        const item = imagens[id];
-        if (!item || typeof item !== 'object') continue;
-        if (typeof item.dataUrl === 'string' && /^data:image\/(webp|jpeg|png);base64,/.test(item.dataUrl)) {
-          if (i === 0) capa = item.dataUrl;
-          else fotos[i - 1] = item.dataUrl;
-        }
-        if (i > 0 && typeof item.legenda === 'string') legendas[i - 1] = item.legenda.slice(0, 60);
-      }
-      cfg.fotos = fotos;
-      cfg.legendasFotos = legendas;
-      if (capa) {
-        $('#cover-main-image').src = capa;
-        $('#cover-main-image').alt = 'Nossa fotografia especial na capa do livro';
-      }
-    }
-    $('#cover-to').textContent = `Uma história dedicada a ${cfg.nomeDela || 'você'}`;
-    document.title = `Nosso Conto de Fadas ♡ ${cfg.nomeDela || 'Para você'}`;
-    pages = makePages();
-    turns = 0;
-    mobileIndex = 0;
-    makeSheets();
-    syncSheets();
-    setMobilePage();
-  };
-
-  window.dispatchEvent(new Event('livro:ready'));
 
   // Decorative stars. Seeded deterministic positions keep the sky stable.
   let seed = 42;
