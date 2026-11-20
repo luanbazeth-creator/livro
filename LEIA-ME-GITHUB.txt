@@ -1,0 +1,50 @@
+LIVRO DE PRINCESA — PUBLICAR PELO GITHUB PAGES
+================================================
+
+Este pacote foi reorganizado para GitHub Pages. index.html e admin.html
+estao NA RAIZ do pacote, em vez de estarem na pasta public.
+
+1. Extraia este ZIP no computador.
+2. No GitHub, abra o repositorio onde publicou o livro.
+3. Envie TODOS OS ARQUIVOS E A PASTA assets, nao envie o ZIP compactado.
+   Em especial, index.html, admin.html, admin.js, admin.css, config.js,
+   firebase-config.js, firebase-public.js, script.js, style.css e assets/
+   devem estar no MESMO nivel dentro do repositorio.
+   Se ja existirem versoes antigas com esses nomes, substitua-as.
+4. Confira em Settings > Pages:
+   Build and deployment > Deploy from a branch; branch main; folder /(root).
+   (Se usar docs, coloque todos esses arquivos em docs e selecione /docs.)
+5. Abra a URL do seu site e acrescente /admin.html.
+
+Exemplo:
+Site:   https://SEU-USUARIO.github.io/SEU-REPOSITORIO/
+Painel: https://SEU-USUARIO.github.io/SEU-REPOSITORIO/admin.html
+
+LOGIN
+No Firebase Authentication, seu email/senha deve estar ativado e seu
+usuario ja deve existir (voce ja fez isso).
+Se o dominio bloquear o login, abra Firebase Console > Authentication >
+Configuracoes > Dominios autorizados e adicione SEU-USUARIO.github.io
+sem https:// e sem o nome do repositorio.
+
+GRAVACAO DAS ALTERACOES — REGRAS DO FIRESTORE
+O GitHub Pages publica os arquivos do site, mas NAO publica automaticamente
+as regras do Firestore. Se ao salvar aparecer 'permission-denied', abra
+Firebase Console > Firestore Database > Regras, e use o conteudo do arquivo
+'firestore.rules' que esta NESTE pacote, substituindo
+COLE_SEU_UID_AQUI pelo UID real da conta no Firebase Authentication.
+Publique as regras no Firebase Console. Nao compartilhe sua senha.
+
+FOTOS
+O painel salva quatro fotos otimizadas no Firestore, sem Firebase Storage.
+O site do GitHub e o painel consultam o MESMO projeto livro-dfccc.
+
+NOTAS
+O endereco admin.html nao fica visivel no livro, mas nao e secreto:
+a protecao de verdade e o login + as regras do Firestore.
+O GitHub Pages nao atualiza instantaneamente, aguarde a implantacao terminar
+nas configuracoes Pages/Actions depois de publicar as alteracoes.
+
+AJUDA PARA FOTOS
+Leia COMO-ATIVAR-FOTOS.txt: o passo a passo para liberar gravação e o
+comportamento esperado depois de clicar Salvar.

@@ -21,14 +21,17 @@ const fields = [
   ['carta','A carta secreta','textarea'],['ultimoRecado','O último recado','textarea']
 ];
 const state = {};
+const uidAtual = () => auth?.currentUser?.uid || '';
+
 const imgStatus = (id,msg,ok=false)=>{const el=document.querySelector(`[data-status="${id}"]`); if(el){el.textContent=msg;el.className=`card-status ${ok?'success':''}`}};
 function message(selector, text, error=false) {const el=$(selector);el.textContent=text;el.className=`${selector.includes('login')||selector.includes('words')?'feedback':'global-status'} ${error?'error':'success'}`;}
 function readableError(err) {
   const code=err?.code||'';
   if(code.includes('invalid-credential')||code.includes('wrong-password')||code.includes('user-not-found'))return 'E-mail ou senha incorretos.';
   if(code.includes('too-many-requests'))return 'Muitas tentativas de login. Tente novamente mais tarde.';
-  if(code.includes('permission-denied'))return 'O Firebase bloqueou a gravação. Confira as regras do Firestore no arquivo COMO-PUBLICAR.txt.';
-  if(code.includes('network-request-failed')||code.includes('unavailable'))return 'Sem conexão com o Firebase. Confira sua internet.';
+  if(code.includes('unauthorized-domain'))return 'Domínio não autorizado no Firebase. Cadastre o domínio github.io do seu site em Authentication → Configurações → Domínios autorizados.';
+  if(code.includes('permission-denied'))return 'O Firestore bloqueou o acesso. Abra Firebase → Firestore → Regras, substitua COLE_SEU_UID_AQUI pelo seu UID e clique em Publicar. Seu UID aparece acima neste painel.';
+  if(code.includes('network-request-failed')||code.includes('unavailable'))return 'Sem conexão com o Firebase. Confira sua internet e tente novamente.';
   return String(err?.message||'Não foi possível completar esta ação.');
 }
 function renderFields() {
@@ -160,9 +163,15 @@ async function start(){
     });
     $('#words-form').addEventListener('submit',saveTexts);
     $('#logout-button').addEventListener('click',async()=>{await signOut(auth);});
+    $('#copy-uid').addEventListener('click',async()=>{
+      const uid = uidAtual();
+      if(!uid)return;
+      try {await navigator.clipboard.writeText(uid); $('#uid-copy-status').textContent='Copiado!';}
+      catch {$('#uid-copy-status').textContent='Selecione o UID ao lado e copie com Ctrl+C.';}
+    });
     onAuthStateChanged(auth,async user=>{
       show('#loading-panel',false);show('#login-panel',!user);show('#admin-panel',!!user);
-      if(user){$('#admin-email').textContent=user.email||'Administrador';await fetchData();}
+      if(user){$('#admin-email').textContent=user.email||'Administrador';$('#admin-uid').textContent=user.uid;await fetchData();}
     },err=>{show('#loading-panel',false);show('#login-panel',true);message('#login-status',readableError(err),true);});
   }catch(e){show('#loading-panel',false);show('#login-panel',true);message('#login-status',readableError(e),true);}
 }

@@ -52,6 +52,12 @@
           <div><p class="eyebrow">ACESSO CONCEDIDO ♡</p><h2>Personalize cada página</h2><p>Edite os textos e envie fotos. O livro recebe as mudanças quando você clicar em salvar.</p></div>
           <div class="account"><span id="admin-email"></span><button id="logout-button" class="outline-action" type="button">Sair da conta</button></div>
         </div>
+        <section class="glass-panel uid-panel" aria-label="Configurar gravação no Firebase">
+          <h3 style="margin:0 0 8px;font-family:inherit">🔐 Acesso às fotos</h3>
+          <p style="margin:0 0 12px">Se a foto não salvar e aparecer “Firestore bloqueou o acesso”, copie seu UID e siga o arquivo <strong>COMO-ATIVAR-FOTOS.txt</strong>. As regras são publicadas no Firebase, não no GitHub.</p>
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap"><span>Seu UID:</span><code id="admin-uid" style="overflow-wrap:anywhere;user-select:all">Carregando...</code><button id="copy-uid" class="outline-action" type="button">Copiar UID</button></div>
+          <p id="uid-copy-status" role="status" aria-live="polite" style="margin:6px 0 0"></p>
+        </section>
         <section class="words-panel glass-panel" aria-labelledby="words-title">
           <div class="section-top"><span class="section-symbol">✍</span><div><p class="eyebrow">SEU LIVRO, SUAS PALAVRAS</p><h2 id="words-title">Os capítulos da nossa história</h2></div></div>
           <form id="words-form" class="words-form"><div id="words-fields" class="words-fields"></div>

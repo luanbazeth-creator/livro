@@ -1,0 +1,31 @@
+// REGRAS DO LIVRO (Firebase Cloud Firestore)
+// IMPORTANTE: substitua COLE_SEU_UID_AQUI pelo UID da sua conta em
+// Firebase Console > Authentication > Usuários > UID do usuário.
+// Assim somente você poderá editar, e qualquer pessoa poderá LER o livro.
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function donoDoLivro() {
+      return request.auth != null && request.auth.uid == 'COLE_SEU_UID_AQUI';
+    }
+    match /livro/{pagina} {
+      allow get: if pagina == 'publicacao';
+      allow list: if false;
+      allow create, update, delete: if donoDoLivro() && pagina == 'publicacao';
+    }
+    match /livro_fotos/{foto} {
+      allow get: if foto in ['capa', 'foto-1', 'foto-2', 'foto-3'];
+      allow list: if false;
+      allow create, update: if donoDoLivro()
+        && foto in ['capa', 'foto-1', 'foto-2', 'foto-3']
+        && request.resource.data.keys().hasOnly(['dataUrl','legenda','atualizadoEm'])
+        && request.resource.data.dataUrl is string
+        && request.resource.data.dataUrl.size() < 700000;
+      allow delete: if donoDoLivro()
+        && foto in ['capa', 'foto-1', 'foto-2', 'foto-3'];
+    }
+    match /{caminho=**} {
+      allow read, write: if false;
+    }
+  }
+}

@@ -1,0 +1,40 @@
+COMO CORRIGIR AS FOTOS QUE NÃO SALVAM
+======================================
+
+SE O LOGIN ABRE MAS A FOTO NÃO SALVA, provavelmente as regras do Firestore
+não permitem a gravação. O arquivo firestore.rules não havia sido incluído
+na versão anterior do pacote para GitHub Pages.
+
+1) Abra seu site no GitHub Pages e entre em /admin.html.
+2) Faça login normalmente com o e-mail e senha do Firebase.
+3) O painel mostra "Seu UID". Clique em "Copiar UID".
+   Se não aparecer, vá ao Firebase Console > Authentication > Usuários
+   e copie o "UID do usuário" da conta de administrador.
+4) Abra https://console.firebase.google.com/
+   Selecione projeto livro-dfccc > Firestore Database > Regras.
+5) Abra o arquivo firestore.rules DESTE PACOTE em um editor de texto.
+   Substitua apenas a expressão COLE_SEU_UID_AQUI pelo UID copiado.
+   Mantenha as aspas simples ao redor do UID.
+6) COPIE TODO O TEXTO do arquivo e cole no editor da aba Regras do Firebase.
+   Clique em PUBLICAR. Somente salvar o arquivo no GitHub NÃO ativa as regras.
+7) Reabra /admin.html, escolha uma foto e clique em SALVAR.
+   A mensagem correta é "Foto publicada! Ela já está no livro. ♡".
+   Reabra a página pública do livro e atualize com Ctrl+F5.
+
+SE AINDA NÃO SALVAR
+- Se aparecer "Firestore bloqueou o acesso", verifique se o UID é o mesmo
+  da conta que está conectada ao painel, e se clicou em Publicar as regras.
+- Se aparecer "Essa imagem não pôde ser reduzida...", tente JPG ou PNG.
+- Escolher uma foto não a salva automaticamente: clique no botão Salvar
+  DENTRO do cartão daquela foto.
+- Se aparecer erro de conexão, confira a internet e tente novamente.
+
+IMPORTANTE
+- Seu site hospedado no GitHub lê/grava diretamente no projeto Firebase
+  "livro-dfccc" por meio do código já configurado.
+- As imagens são reduzidas e guardadas em documentos separados no Firestore.
+- Firestore tem limites de tamanho para documentos, por isso as fotos
+  grandes são reduzidas antes de salvar.
+- O arquivo firestore.rules pode ficar dentro do ZIP/repositório como
+  referência, mas SOMENTE colar e PUBLICAR no console ativa as regras.
+- NUNCA compartilhe sua senha. Não use regra "allow write: if true".
