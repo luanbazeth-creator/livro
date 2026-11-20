@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#24112f">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Ateliê secreto ♕ | Nosso Conto de Fadas</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Nunito+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+  <script src="config.js" defer></script>
+  <script src="firebase-config.js" defer></script>
+  <script src="admin.js" type="module"></script>
+</head>
+<body>
+  <div class="ambient" aria-hidden="true"><div class="ambient-sparkles">✦　✧　✦</div></div>
+  <div class="shell">
+    <header class="top-bar">
+      <div class="brand-icon" aria-hidden="true">♕</div>
+      <div class="brand-text"><span>EDIÇÃO ESPECIAL</span><strong>Ateliê Secreto</strong></div>
+      <a class="book-link" href="index.html">← Ver o livro</a>
+    </header>
+    <main>
+      <section class="intro">
+        <p class="eyebrow">✧ O CANTINHO DE QUEM ESCREVE A HISTÓRIA ✧</p>
+        <h1>A magia acontece <em>nos bastidores.</em></h1>
+        <p>Edite cada lembrança do seu próprio conto de fadas. Sua princesa recebe a história; você cuida dos pequenos detalhes. ♡</p>
+      </section>
+      <section id="loading-panel" class="glass-panel login-panel" aria-live="polite">
+        <div class="center-symbol">✧</div><h2>Procurando a chave...</h2>
+        <p>Conectando ao castelo encantado.</p>
+      </section>
+      <section id="login-panel" class="glass-panel login-panel" hidden>
+        <div class="center-symbol">♕</div>
+        <p class="eyebrow">ENTRADA RESERVADA</p>
+        <h2>A chave do castelo</h2>
+        <p>Use o e-mail e a senha que você já cadastrou no Firebase Authentication.</p>
+        <form id="login-form">
+          <label for="email">E-mail de administrador</label>
+          <input id="email" name="email" type="email" autocomplete="username" placeholder="seuemail@exemplo.com" required>
+          <label for="password">Senha</label>
+          <input id="password" name="password" type="password" autocomplete="current-password" placeholder="••••••••" required>
+          <button class="primary-action" id="login-button" type="submit">Entrar no ateliê <span>→</span></button>
+        </form>
+        <p id="login-status" class="feedback" role="status" aria-live="polite"></p>
+      </section>
+      <section id="admin-panel" hidden>
+        <div class="welcome-bar glass-panel">
+          <div><p class="eyebrow">ACESSO CONCEDIDO ♡</p><h2>Personalize cada página</h2><p>Edite os textos e envie fotos. O livro recebe as mudanças quando você clicar em salvar.</p></div>
+          <div class="account"><span id="admin-email"></span><button id="logout-button" class="outline-action" type="button">Sair da conta</button></div>
+        </div>
+        <section class="words-panel glass-panel" aria-labelledby="words-title">
+          <div class="section-top"><span class="section-symbol">✍</span><div><p class="eyebrow">SEU LIVRO, SUAS PALAVRAS</p><h2 id="words-title">Os capítulos da nossa história</h2></div></div>
+          <form id="words-form" class="words-form"><div id="words-fields" class="words-fields"></div>
+            <div class="words-actions"><button id="save-words" class="primary-action" type="submit">Salvar os textos ✦</button><p id="words-status" class="feedback" role="status" aria-live="polite"></p></div>
+          </form>
+        </section>
+        <section aria-labelledby="photos-title">
+          <div class="gallery-title-wrap"><p class="eyebrow">SEU ÁLBUM ENCANTADO</p><h2 id="photos-title">As fotos que contam tudo</h2><p>Escolha suas fotos pelo celular. O site reduz o tamanho automaticamente e salva no Firestore, sem Firebase Storage.</p></div>
+          <div class="gallery-grid" id="editors"></div>
+        </section>
+        <div class="bottom-bar glass-panel"><p>✧ O painel fica fora do livro público. Sua namorada abre somente a história, sem precisar fazer login.</p><a href="index.html" class="primary-action inline-action">Abrir o livro atualizado →</a></div>
+      </section>
+      <p id="global-status" class="global-status" role="status" aria-live="polite"></p>
+    </main>
+    <footer class="site-footer">✧ Feito com carinho, guardado com cuidado ✧</footer>
+  </div>
+</body>
+</html>
